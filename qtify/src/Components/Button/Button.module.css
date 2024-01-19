@@ -1,0 +1,12 @@
+.button{
+    position: relative;
+    right: 30px;
+    width: 150px;
+    height: 40px;
+    padding: 10px, 16px, 10px, 16px;
+    background-color: black;
+    color: #34C94B;
+    border-radius: 12px;
+    cursor: pointer;
+    size: 200px;
+}

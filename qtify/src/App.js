@@ -1,24 +1,38 @@
-import logo from './logo.svg';
-import './App.css';
+import { useEffect, useState } from "react";
+import React from "react"
+import Navbar from "./Components/Navbar/Navbar";
+// import Hero from "../Components/Hero/Hero"
+import { Outlet } from "react-router-dom";
+import { fetchNewAlbums, fetchSongs, fetchTopAlbums } from "./Api/Api";
 
 function App() {
+  const [searchData, setSearchData] = useState();
+  const[data, setData] = useState({});
+
+  const generateData = (key, source) => {
+    source().then((value) => {
+      setData((prevData) => {
+        return {...prevData, [key]: value}
+      })
+    })
+  }
+
+  useEffect(() => {
+    generateData("topAlbums", fetchTopAlbums)
+    generateData("newAlbums", fetchNewAlbums)
+    generateData("songs", fetchSongs)
+
+  }, [])
+
+  const { topAlbums=[], newAlbums=[], songs=[] } = data;
+
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <Navbar searchData={[...topAlbums, ...newAlbums]} />
+     {/* placeholder component (replaced with childcomponent) */}
+     <Outlet context={{data: {topAlbums, newAlbums, songs}}}/> 
+    </>
   );
 }
 
