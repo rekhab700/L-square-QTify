@@ -3,10 +3,10 @@
     left: 0;
     top: 0; 
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
     background-color: green;
     height: 74px;
     width: 100vw;
-    /* padding: 0px, 32px; */
+    padding: 0px, 32px;
 }
